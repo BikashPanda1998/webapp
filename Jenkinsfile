@@ -33,14 +33,15 @@ pipeline{
    stage("deploy"){
 	   steps{
 
-      sshagent(['deployment']) {
+     sshagent(['tomcat_user']) {
+    // some block
 
 	        sh """
                  
-            scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@172.31.12.90:/home/ec2-user/tomcat8/webapps/
+            scp -o StrictHostKeyChecking=no target/myweb.war ec2-user@13.235.81.207:/home/ec2-user/tomcat8/webapps/
 
-              ssh ec2-user@172.31.12.90 /home/ec2-user/tomcat8/bin/shutdown.sh
-               ssh ec2-user@172.31.12.90 /home/ec2-user/tomcat8/bin/startup.sh
+              ssh ec2-user@13.235.81.207 /home/ec2-user/tomcat8/bin/shutdown.sh
+               ssh ec2-user@13.235.81.207 /home/ec2-user/tomcat8/bin/startup.sh
             
           
           """
